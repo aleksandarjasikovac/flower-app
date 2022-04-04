@@ -9,7 +9,7 @@ const FlowerCard: FC<FlowerProps> = (props) => {
   const {
     props: { id, name, latin_name, sightings, profile_picture },
   } = props;
-  console.log(name);
+
   return (
     <div key={id} className="group relative">
       <div className="w-full h-96 bg-gray-200 rounded-md overflow-hidden lg:h-96 lg:aspect-none">

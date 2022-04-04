@@ -5,21 +5,14 @@ import { postActions } from "../store";
 
 import { Hero } from "../components/Hero";
 import { Layout } from "../components/Layout";
+import FlowerList from "../components/FlowerList";
 
 export const Home: FC = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(postActions.getPosts());
-  }, [dispatch]);
-
-  const { data } = useSelector((state: any) => state.posts);
-  console.log(data);
-
   return (
     <div>
       <Layout>
         <Hero />
+        <FlowerList />
       </Layout>
     </div>
   );
