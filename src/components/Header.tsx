@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
+import { SignUp } from "./SignUp";
+import { Login } from "./Login";
 
 export const Header = () => {
+  const [signUpModal, setSignUpModal] = useState(false);
+  const [logInModal, setLogInModal] = useState(false);
+
+  const signUpToggleModal = () => {
+    setSignUpModal(!signUpModal);
+  };
+
+  const toggleLogInModal = () => {
+    setLogInModal(!logInModal);
+  };
+
+  //prevent scrolling if modal is open
+  if (signUpModal || logInModal) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "unset";
+  }
   return (
     <header>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex">
@@ -17,14 +36,23 @@ export const Header = () => {
               <li>Flowers</li>
               <li>Latest Sightings</li>
               <li>Favorites</li>
-              <li>Login</li>
             </ul>
-            <button className="ml-12 bg-primary text-white py-3 px-8 rounded-full">
+            <button onClick={toggleLogInModal} className="ml-12 text-primary">
+              Login
+            </button>
+            <button
+              onClick={signUpToggleModal}
+              className="ml-12 bg-primary text-white py-3 px-8 rounded-full"
+            >
               New Account
             </button>
           </div>
         </div>
       </div>
+      <div className="">
+        {signUpModal && <SignUp modal={signUpToggleModal} />}
+      </div>
+      <div className="">{logInModal && <Login modal={toggleLogInModal} />}</div>
     </header>
   );
 };

@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
-import React, { FC } from "react";
+import React from "react";
 
-const App: FC = () => {
+function App() {
   return (
     <div>
       <BrowserRouter>
@@ -12,6 +12,6 @@ const App: FC = () => {
       </BrowserRouter>
     </div>
   );
-};
+}
 
 export default App;
