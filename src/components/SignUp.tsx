@@ -9,9 +9,9 @@ interface ToggleModal {
 export const SignUp = ({ modal }: ToggleModal) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [first_name, setFirst_name] = useState("");
-  const [last_name, setLast_name] = useState("");
-  const [date_of_birth, setDate_of_birth] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
 
   const submitHandler = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -21,9 +21,9 @@ export const SignUp = ({ modal }: ToggleModal) => {
       .post("https://flowrspot-api.herokuapp.com/api/v1/users/register", {
         email: email,
         password: password,
-        first_name: first_name,
-        last_name: last_name,
-        date_of_birth: date_of_birth,
+        first_name: firstName,
+        last_name: lastName,
+        date_of_birth: dateOfBirth,
       })
       .then((response) => {
         console.log(response);
@@ -51,23 +51,23 @@ export const SignUp = ({ modal }: ToggleModal) => {
               <input
                 className="h-12 w-full border-1 border bg-gray-50 pl-3 rounded-sm"
                 placeholder="First Name"
-                value={first_name}
-                onChange={(e) => setFirst_name(e.target.value)}
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
               />
 
               <input
                 className="h-12 w-full border-1 border bg-gray-50 pl-3 rounded-sm"
                 placeholder="Last Name"
-                value={last_name}
-                onChange={(e) => setLast_name(e.target.value)}
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
               />
 
               <div className="col-span-2">
                 <input
                   className="h-12 w-full border-1 border bg-gray-50 pl-3 rounded-sm"
                   placeholder="Date of birth"
-                  value={date_of_birth}
-                  onChange={(e) => setDate_of_birth(e.target.value)}
+                  value={dateOfBirth}
+                  onChange={(e) => setDateOfBirth(e.target.value)}
                 />
               </div>
 
