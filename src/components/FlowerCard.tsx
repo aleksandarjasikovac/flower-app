@@ -1,15 +1,20 @@
 import { FC } from "react";
-import Post from "../models/postModel";
 
 interface FlowerProps {
-  props: Post;
+  id: number;
+  name: string;
+  latin_name: string;
+  sightings: string;
+  profile_picture: string;
 }
 
-const FlowerCard: FC<FlowerProps> = (props) => {
-  const {
-    props: { id, name, latin_name, sightings, profile_picture },
-  } = props;
-
+const FlowerCard: FC<FlowerProps> = ({
+  id,
+  name,
+  latin_name,
+  sightings,
+  profile_picture,
+}) => {
   return (
     <div key={id} className="group relative">
       <div className="w-full h-96 bg-gray-200 rounded-md overflow-hidden lg:h-96 lg:aspect-none">

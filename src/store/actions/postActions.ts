@@ -4,8 +4,6 @@ import { Action } from ".";
 
 import ActionType from "./actionTypes";
 
-
-
 export const getPosts = () => async (dispatch: Dispatch<Action>) => {
   try {
     dispatch({
@@ -18,7 +16,6 @@ export const getPosts = () => async (dispatch: Dispatch<Action>) => {
       type: ActionType.GET_POST_SUCCESS,
       payload: data,
     });
-
   } catch (error: any) {
     dispatch({
       type: ActionType.GET_POST_FAIL,

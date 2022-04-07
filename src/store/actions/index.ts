@@ -1,4 +1,5 @@
 import Post from "../../models/postModel";
+import User from "../../models/userLogin";
 import ActionType from "./actionTypes";
 
 interface GetPostRequestAction {
@@ -15,7 +16,23 @@ interface GetPostFailAction {
   payload: string;
 }
 
+interface GetUserRequestAction {
+  type: ActionType.USER_LOGIN_REQUEST;
+}
+
+interface GetUserSuccessAction {
+  type: ActionType.USER_LOGIN_SUCCESS;
+  payload: { data: { auth_token: string }; headers: any };
+}
+
+interface GetUserFailAction {
+  type: ActionType.USER_LOGIN_FAIL;
+  payload: string;
+}
 export type Action =
   | GetPostRequestAction
   | GetPostSuccessAction
-  | GetPostFailAction;
+  | GetPostFailAction
+  | GetUserSuccessAction
+  | GetUserRequestAction
+  | GetUserFailAction;

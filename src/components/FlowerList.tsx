@@ -10,7 +10,7 @@ const FlowerList: FC = () => {
 
   useEffect(() => {
     dispatch(postActions.getPosts());
-  }, [dispatch]);
+  }, []);
 
   const { data } = useSelector((state: any) => state.posts);
 
@@ -21,7 +21,13 @@ const FlowerList: FC = () => {
           {data &&
             data?.flowers.map((flower: any) => (
               <div key={flower.id}>
-                <FlowerCard props={flower} />
+                <FlowerCard
+                  name={flower.name}
+                  id={flower.id}
+                  latin_name={flower.latin_name}
+                  sightings={flower.sightings}
+                  profile_picture={flower.profile_picture}
+                />
               </div>
             ))}
         </div>

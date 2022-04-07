@@ -4,7 +4,12 @@ import thunk from "redux-thunk";
 
 import reducers from "./reducers";
 
+const initialState = {};
+
 export const store = createStore(
   reducers,
+  initialState,
   composeWithDevTools(applyMiddleware(thunk))
 );
+
+export type RootState = ReturnType<typeof store.getState>;

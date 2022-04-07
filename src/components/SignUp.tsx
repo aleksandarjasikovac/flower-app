@@ -25,9 +25,7 @@ export const SignUp = ({ modal }: ToggleModal) => {
         last_name: lastName,
         date_of_birth: dateOfBirth,
       })
-      .then((response) => {
-        console.log(response);
-      });
+      .then((response) => {});
   };
 
   return (
