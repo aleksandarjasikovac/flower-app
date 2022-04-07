@@ -1,120 +1,110 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import axios from "axios";
+import React, { SyntheticEvent, useState } from "react";
+import { GrClose } from "react-icons/gr";
 
-type FormValues = {
-  first_name: string;
-  last_name: string;
-  email: string;
-  date_of_birth: string;
-  password: string;
-};
+interface ToggleModal {
+  modal: any;
+}
 
-export default function SignUp() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>();
+export const SignUp = ({ modal }: ToggleModal) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+
+  const submitHandler = async (e: SyntheticEvent) => {
+    e.preventDefault();
+
+    // interact with the backend
+    axios
+      .post("https://flowrspot-api.herokuapp.com/api/v1/users/register", {
+        email: email,
+        password: password,
+        first_name: firstName,
+        last_name: lastName,
+        date_of_birth: dateOfBirth,
+      })
+      .then((response) => {});
+  };
 
   return (
-    <div className="h-screen w-screen flex justify-center items-center p-6 flex-col">
-      <div className="w-500  bg-gray-100 p-8">
-        <h1 className="text-2xl font-semibold pb-6 text-center">
-          Create An Account
-        </h1>
-        <form
-          onSubmit={handleSubmit((data) => {
-            console.log(data);
-          })}
-        >
-          <div className="grid grid-cols-2 gap-4">
-            <div className="">
-              <input
-                className="h-12 w-full border-1 border bg-gray-50 pl-3 rounded-sm"
-                {...register("first_name", {
-                  required: "This field is required",
-                })}
-                placeholder="First Name"
-                id="firstName"
-              />
-              {errors.first_name && (
-                <span className="text-xs text-red-500">
-                  {errors.first_name.message}
-                </span>
-              )}
-            </div>
-            <div className="">
-              <input
-                className="h-12 w-full border-1 border bg-gray-50 pl-3 rounded-sm"
-                {...register("last_name", {
-                  required: "This field is required",
-                })}
-                placeholder="Last Name"
-                id="lastName"
-              />
-              {errors.last_name && (
-                <span className="text-xs text-red-500">
-                  {errors.last_name.message}
-                </span>
-              )}
-            </div>
-
-            <div className="col-span-2">
-              <input
-                className="h-12 w-full border-1 border bg-gray-50 pl-3 rounded-sm"
-                {...register("date_of_birth", {
-                  required: "This field is required",
-                })}
-                placeholder="Date of birth"
-                id="age"
-              />
-              {errors.date_of_birth && (
-                <span className="text-xs text-red-500">
-                  {errors.date_of_birth.message}
-                </span>
-              )}
-            </div>
-            <div className="col-span-2">
-              <input
-                className="h-12 w-full border-1 border bg-gray-50 pl-3 rounded-sm"
-                {...register("email", { required: "This field is required" })}
-                placeholder="Email Address"
-                id="email"
-              />
-              {errors.email && (
-                <span className="text-xs text-red-500">
-                  {errors.email.message}
-                </span>
-              )}
-            </div>
-            <div className="col-span-2">
-              <input
-                className="h-12 w-full border-1 border bg-gray-50 pl-3 rounded-sm"
-                {...register("password", {
-                  required: "This field is required",
-                })}
-                placeholder="Password"
-                id="password"
-                type="password"
-              />
-              {errors.password && (
-                <span className="text-xs text-red-500">
-                  {errors.password.message}
-                </span>
-              )}
-            </div>
-            <div className="col-span-2">
-              <button
-                type="submit"
-                className="bg-primary w-full py-4 text-white rounded-sm"
-              >
-                Create Account
-              </button>
-            </div>
+    <div className="absolute top-0 z-10 h-screen w-screen flex justify-center items-center p-6 flex-col">
+      <div
+        onClick={modal}
+        className=" absolute w-screen h-screen bg-black/60"
+      />
+      <div className="z-10 flex justify-center flex-col">
+        <div className=" w-500 bg-white p-8 rounded-md">
+          <div>
+            <button onClick={modal} className="w-full flex justify-end">
+              <GrClose />
+            </button>
           </div>
-        </form>
+          <h1 className="text-2xl font-semibold pb-8 text-center">
+            Create An Account
+          </h1>
+          <form onSubmit={submitHandler}>
+            <div className="grid grid-cols-2 gap-4">
+              <input
+                className="h-12 w-full border-1 border bg-gray-50 pl-3 rounded-sm"
+                placeholder="First Name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+
+              <input
+                className="h-12 w-full border-1 border bg-gray-50 pl-3 rounded-sm"
+                placeholder="Last Name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+
+              <div className="col-span-2">
+                <input
+                  className="h-12 w-full border-1 border bg-gray-50 pl-3 rounded-sm"
+                  placeholder="Date of birth"
+                  value={dateOfBirth}
+                  onChange={(e) => setDateOfBirth(e.target.value)}
+                />
+              </div>
+
+              <div className="col-span-2">
+                <input
+                  className="h-12 w-full border-1 border bg-gray-50 pl-3 rounded-sm"
+                  placeholder="Email Address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div className="col-span-2">
+                <input
+                  className="h-12 w-full border-1 border bg-gray-50 pl-3 rounded-sm"
+                  placeholder="Password"
+                  value={password}
+                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+
+              <div className="col-span-2 mt-4">
+                <button
+                  type="submit"
+                  className="bg-primary w-full py-4 text-white rounded-sm"
+                >
+                  Create Account
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div className="mt-4 text-white flex justify-center">
+          <button onClick={modal} className="hover:text-primary ">
+            I don't want to register
+          </button>
+        </div>
       </div>
-      <button className="pt-8">I don't want to register</button>
     </div>
   );
-}
+};

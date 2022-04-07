@@ -1,14 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
+
 import { Hero } from "../components/Hero";
 import { Layout } from "../components/Layout";
-import SignUp from "../components/SignUp";
+import FlowerList from "../components/FlowerList";
 
-export const Home = () => {
+export const Home: FC = () => {
   return (
     <div>
       <Layout>
         <Hero />
-        <SignUp />
+        <FlowerList />
       </Layout>
     </div>
   );
